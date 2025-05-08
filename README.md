@@ -34,6 +34,20 @@ console.log(parsed)
 //   amount: 0.75
 // }
 
+// Parse legacy format
+const legacyUri =
+  'txo:btc:4e9c1ef9ba5fa3b0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0:0 0.75 Kx9'
+const parsedLegacy = parseTxoUri(legacyUri)
+console.log(parsedLegacy)
+// Output:
+// {
+//   network: 'btc',
+//   txid: '4e9c1ef9ba5fa3b0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0',
+//   output: 0,
+//   amount: 0.75,
+//   privkey: 'Kx9'
+// }
+
 // Check if a URI is valid
 console.log(isValidTxoUri(uri)) // true
 
@@ -58,6 +72,9 @@ The package includes a command-line tool that allows you to parse TXO URIs direc
 # Parse a TXO URI and output the full JSON
 txo-parser "txo:btc:4e9c1ef9ba5fa3b0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0:0?amount=0.75"
 
+# Parse legacy format
+txo-parser "txo:btc:4e9c1ef9ba5fa3b0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0:0 0.75 Kx9"
+
 # Extract just the txid
 txo-parser "txo:btc:4e9c1ef9ba5fa3b0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0:0" --txid
 
@@ -73,6 +90,21 @@ If you haven't installed the package globally, you can use `npx`:
 ```bash
 npx txo-parser "txo:btc:4e9c1ef9ba5fa3b0aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0:0"
 ```
+
+## Supported Formats
+
+The parser supports two formats:
+
+1. **Standard Format** (as per specification):  
+   `txo:<network>:<txid>:<output>?key=value&key=value...`
+
+2. **Legacy Format**:  
+   `txo:<network>:<txid>:<output> [amount] [privkey]`
+
+The legacy format supports up to two space-separated parameters after the basic structure:
+
+- First parameter is interpreted as the amount
+- Second parameter is interpreted as the private key
 
 ## API
 
@@ -99,7 +131,7 @@ Formats a JSON object into a TXO URI string.
 
 - **Parameters:**
   - `data` (object): The data to format (must include network, txid, and output)
-- **Returns:** Formatted TXO URI string
+- **Returns:** Formatted TXO URI string (always in standard format)
 - **Throws:** Error if required fields are missing or invalid
 
 ## Testing

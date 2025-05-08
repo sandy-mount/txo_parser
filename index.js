@@ -3,6 +3,7 @@
  * Implementation of the TXO URI Specification (v0.1)
  * 
  * Format: txo:<network>:<txid>:<output>?key=value&key=value...
+ * Legacy Format: txo:<network>:<txid>:<output> [amount] [privkey]
  */
 
 /**
@@ -16,8 +17,22 @@ export function parseTxoUri (uri) {
     throw new Error('Invalid URI: URI must be a non-empty string');
   }
 
-  // Split the URI into its components
-  const [scheme, network, txid, outputAndRest] = uri.split(':');
+  // Check if this is using the legacy space-separated format
+  const isLegacyFormat = !uri.includes('?') && uri.split(' ').length > 1;
+
+  // Parse the basic structure first
+  let basicParts;
+  let extraParts = [];
+
+  if (isLegacyFormat) {
+    const allParts = uri.split(' ');
+    basicParts = allParts[0].split(':');
+    extraParts = allParts.slice(1);
+  } else {
+    basicParts = uri.split(':');
+  }
+
+  const [scheme, network, txid, outputAndRest] = basicParts;
 
   // Validate scheme
   if (scheme !== 'txo') {
@@ -41,7 +56,7 @@ export function parseTxoUri (uri) {
 
   // Split the output and query string
   let output, queryString;
-  if (outputAndRest.includes('?')) {
+  if (!isLegacyFormat && outputAndRest.includes('?')) {
     [output, queryString] = outputAndRest.split('?');
   } else {
     output = outputAndRest;
@@ -78,6 +93,22 @@ export function parseTxoUri (uri) {
         }
       }
     });
+  }
+
+  // Handle legacy format with space-separated parameters
+  if (isLegacyFormat && extraParts.length > 0) {
+    // First extra part is amount
+    if (extraParts[0]) {
+      const amount = parseFloat(extraParts[0]);
+      if (!isNaN(amount)) {
+        queryParams.amount = amount;
+      }
+    }
+
+    // Second extra part is privkey
+    if (extraParts.length > 1 && extraParts[1]) {
+      queryParams.privkey = extraParts[1];
+    }
   }
 
   // Build the result object

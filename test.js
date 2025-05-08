@@ -30,6 +30,24 @@ examples.forEach((uri, index) => {
   }
 });
 
+// Legacy format examples
+console.log('\n=== Legacy Format Examples ===');
+const legacyExamples = [
+  `txo:btc:${validTxid}:0 0.75`,
+  `txo:btc:${validTxid}:0 0.75 Kx9`
+];
+
+legacyExamples.forEach((uri, index) => {
+  console.log(`\nLegacy Example ${index + 1}: ${uri}`);
+  try {
+    const parsed = parseTxoUri(uri);
+    console.log('Parsed result:', JSON.stringify(parsed, null, 2));
+    console.log('Is valid:', isValidTxoUri(uri));
+  } catch (error) {
+    console.error('Error parsing URI:', error.message);
+  }
+});
+
 // Examples of creating TXO URIs from JSON objects
 console.log('\n=== Formatting Examples ===');
 
