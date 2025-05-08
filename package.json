@@ -1,0 +1,31 @@
+{
+  "name": "txo_parser",
+  "version": "0.0.1",
+  "description": "Parser for TXO URI Specification (v0.1)",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "txo-parser": "./cli.js"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandy-mount/txo_parser.git"
+  },
+  "keywords": [
+    "txo",
+    "uri",
+    "parser",
+    "bitcoin",
+    "blockchain",
+    "cli"
+  ],
+  "author": "Melvin Carvalho",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sandy-mount/txo_parser/issues"
+  },
+  "homepage": "https://github.com/sandy-mount/txo_parser#readme"
+}
