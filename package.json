@@ -1,7 +1,7 @@
 {
   "name": "txo_parser",
-  "version": "0.0.3",
-  "description": "Parser for TXO URI Specification (v0.1)",
+  "version": "0.0.4",
+  "description": "Parser for TXO URI Specification (v0.2)",
   "type": "module",
   "main": "index.js",
   "bin": {
