@@ -4,6 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>TXO — Voucher Management &amp; Bitcoin Anchoring</title>
+  <meta name="description" content="Parse, build, and manage TXO URIs. Voucher pool, faucet, blocktrails anchoring on Bitcoin, web ledger with history.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="TXO — Voucher Management & Bitcoin Anchoring">
+  <meta property="og:description" content="Interactive demo for TXO URIs. Manage vouchers, anchor state to Bitcoin via blocktrails, track web ledger evolution.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sandy-mount.github.io/txo_parser/demo/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="TXO — Voucher Management & Bitcoin Anchoring">
+  <meta name="twitter:description" content="Interactive demo for TXO URIs. Manage vouchers, anchor state to Bitcoin, track ledger evolution.">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -26,6 +38,9 @@
     #pane-tabs { max-width: 960px !important; margin: 0 auto !important; border-bottom-color: rgba(255,255,255,0.06) !important; }
     #pane-container { max-width: 960px !important; margin: 0 auto !important; }
     .boot { display: flex; align-items: center; justify-content: center; height: 40vh; color: rgba(255,255,255,0.25); font-size: 0.9rem; }
+    .txo-footer { text-align: center; padding: 32px 16px; font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+    .txo-footer a { color: rgba(255,255,255,0.3); text-decoration: none; }
+    .txo-footer a:hover { color: rgba(255,255,255,0.5); }
   </style>
 </head>
 <body>
@@ -41,6 +56,13 @@
 <script type="module" data-pane src="panes/spec-pane.js"></script>
 
 <div id="losos"><div class="boot">Loading...</div></div>
+
+<footer class="txo-footer">
+  Powered by <a href="https://losos.org/">LOSOS</a> &middot;
+  <a href="https://github.com/sandy-mount/txo_parser">txo_parser</a> &middot;
+  <a href="https://blocktrails.org/">blocktrails</a> &middot;
+  <a href="did:nostr:d769d2b81c051d2f2c0b437d0ffe39e00ff0f7161b520f0bd30811f4c057795f">did:nostr:d769...795f</a>
+</footer>
 
 <script>
 (function() {
