@@ -1,0 +1,9 @@
+{
+  "@context": "https://w3id.org/webledgers",
+  "@id": "#this",
+  "type": "WebLedger",
+  "name": "Voucher Pool Ledger",
+  "description": "Testnet4 voucher balances",
+  "defaultCurrency": "satoshi",
+  "entries": []
+}

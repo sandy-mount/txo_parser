@@ -79,17 +79,20 @@ export function parseTxoUri (uri) {
         // Convert key to lowercase for case-insensitivity
         const normalizedKey = key.toLowerCase();
 
+        // Normalize aliases to canonical names
+        const canonicalKey = normalizedKey === 'key' ? 'privkey' : normalizedKey;
+
         // Process specific key types
-        if (normalizedKey === 'amount') {
+        if (canonicalKey === 'amount') {
           // Parse amount as a number
           const amount = parseFloat(value);
           if (!isNaN(amount)) {
-            queryParams[normalizedKey] = amount;
+            queryParams[canonicalKey] = amount;
           } else {
-            queryParams[normalizedKey] = value;
+            queryParams[canonicalKey] = value;
           }
         } else {
-          queryParams[normalizedKey] = value;
+          queryParams[canonicalKey] = decodeURIComponent(value);
         }
       }
     });
@@ -167,12 +170,30 @@ export function formatTxoUri (data) {
   // Build the base URI
   let uri = `txo:${data.network}:${data.txid}:${output}`;
 
-  // Add query parameters
+  // Add query parameters (canonical key names, stable order: amount first, then privkey, then rest)
+  const reserved = ['network', 'txid', 'output'];
+  const entries = Object.entries(data).filter(([k]) => !reserved.includes(k) && data[k] !== undefined);
+
+  // Normalize 'key' alias to 'privkey'
   const queryParams = [];
-  Object.entries(data).forEach(([key, value]) => {
-    if (!['network', 'txid', 'output'].includes(key) && value !== undefined) {
-      queryParams.push(`${key.toLowerCase()}=${encodeURIComponent(value)}`);
+  const seen = new Set();
+  for (const [k, v] of entries) {
+    const canonical = k.toLowerCase() === 'key' ? 'privkey' : k.toLowerCase();
+    if (!seen.has(canonical)) {
+      seen.add(canonical);
+      queryParams.push(`${canonical}=${encodeURIComponent(v)}`);
     }
+  }
+
+  // Stable order: amount first, privkey second, rest alphabetical
+  queryParams.sort((a, b) => {
+    const keyA = a.split('=')[0];
+    const keyB = b.split('=')[0];
+    if (keyA === 'amount') return -1;
+    if (keyB === 'amount') return 1;
+    if (keyA === 'privkey') return -1;
+    if (keyB === 'privkey') return 1;
+    return keyA.localeCompare(keyB);
   });
 
   if (queryParams.length > 0) {

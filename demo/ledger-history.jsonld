@@ -1,0 +1,9 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "bt": "https://blocktrails.org/ns/"
+  },
+  "@id": "#this",
+  "@type": "bt:History",
+  "bt:snapshots": []
+}

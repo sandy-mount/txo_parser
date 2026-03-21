@@ -48,6 +48,7 @@ All keys are **case-insensitive** but SHOULD be lower-case snake_case.
 | ------------- | --------------------------- | --------------------------------------------------------------------- |
 | `amount`      | decimal or integer          | Coin value of this output (units follow `network`; BTC uses bitcoins) |
 | `privkey`     | WIF, hex, or miniscript key | Spending key for the output; **keep secure**                          |
+| `key`         | _(alias for `privkey`)_     | Accepted on input; parsers MUST normalize to `privkey`                |
 | `script_type` | string                      | Type of script used (e.g., "p2pkh", "p2sh", "p2wpkh", "p2tr")         |
 | …             | …                           | Extra keys are allowed; unrecognized keys MUST be ignored by parsers  |
 
@@ -76,6 +77,7 @@ value        = *VCHAR
 | Adds amount       | `txo:btc:4e9c…a3b0:0?amount=0.75`                               |
 | With script type  | `txo:btc:4e9c…a3b0:0?amount=0.75&script_type=p2tr`              |
 | Full spend-ready  | `txo:btc:4e9c…a3b0:0?amount=0.75&privkey=Kx9…&script_type=p2tr` |
+| With key alias    | `txo:btc:4e9c…a3b0:0?amount=0.75&key=Kx9…` _(normalized to privkey)_ |
 
 ---
 
@@ -108,7 +110,8 @@ The canonical parse result **MUST** expand snake_case keys exactly as shown.
    - `output` ∈ `0‥4294967295`
 
 4. **Decode** `query_string` per RFC 3986.
-5. **Output** JSON as in §6; ignore unknown keys.
+5. **Normalize** aliases: `key` → `privkey`.
+6. **Output** JSON as in §6; ignore unknown keys.
 
 ---
 
@@ -134,6 +137,7 @@ The canonical parse result **MUST** expand snake_case keys exactly as shown.
 | Version | Date       | Note                   |
 | ------- | ---------- | ---------------------- |
 | 0.1     | 2025-05-08 | Initial public release |
+| 0.2     | 2026-03-21 | Add `key` as alias for `privkey`; normalize step in parser algorithm; stable param ordering |
 
 ---
 
@@ -142,7 +146,7 @@ The canonical parse result **MUST** expand snake_case keys exactly as shown.
 ```
 scheme        : "txo"
 path segments : network • txid • output
-query keys    : amount, privkey, script_type, expires_at, …
+query keys    : amount, privkey (alias: key), script_type, expires_at, …
 networks      : btc, tbtc4, ltc, vtc, … (see registry)
 all snake_case, all English
 ```

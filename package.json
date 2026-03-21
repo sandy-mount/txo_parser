@@ -1,6 +1,6 @@
 {
   "name": "txo_parser",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Parser for TXO URI Specification (v0.1)",
   "type": "module",
   "main": "index.js",
@@ -23,7 +23,7 @@
     "cli"
   ],
   "author": "Melvin Carvalho",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/sandy-mount/txo_parser/issues"
   },

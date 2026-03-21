@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TXO — Voucher Management &amp; Bitcoin Anchoring</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(160deg, #0a0f1a 0%, #1a1a3e 50%, #0f172a 100%);
+      color: rgba(255,255,255,0.9);
+      min-height: 100vh;
+    }
+    #losos { max-width: 100% !important; }
+    #losos > div { max-width: 100% !important; width: 100% !important; }
+    button.pane-tab {
+      color: rgba(255,255,255,0.45) !important;
+      font-weight: 600 !important;
+      font-size: 0.85em !important;
+      padding: 12px 20px !important;
+    }
+    button.pane-tab[aria-selected="true"] {
+      color: rgba(255,255,255,0.95) !important;
+    }
+    #pane-tabs { max-width: 960px !important; margin: 0 auto !important; border-bottom-color: rgba(255,255,255,0.06) !important; }
+    #pane-container { max-width: 960px !important; margin: 0 auto !important; }
+    .boot { display: flex; align-items: center; justify-content: center; height: 40vh; color: rgba(255,255,255,0.25); font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<script src="https://unpkg.com/xlogin"></script>
+<script id="data" type="application/ld+json" src="voucher-data.jsonld"></script>
+<script type="module" data-pane src="panes/parser-pane.js"></script>
+<script type="module" data-pane src="panes/builder-pane.js"></script>
+<script type="module" data-pane src="panes/voucher-pane.js"></script>
+<script type="module" data-pane src="panes/faucet-pane.js"></script>
+<script type="module" data-pane src="panes/blocktrails-pane.js"></script>
+<script type="module" data-pane src="panes/ledger-pane.js"></script>
+<script type="module" data-pane src="panes/spec-pane.js"></script>
+
+<div id="losos"><div class="boot">Loading...</div></div>
+
+<script>
+(function() {
+  // Capture ?key= for auto-import
+  var params = new URLSearchParams(location.search)
+  if (params.has('key')) {
+    window.__pendingImport = params.get('key')
+    history.replaceState({}, '', location.pathname)
+  }
+
+  // Boot shell
+  var s = document.createElement('script')
+  s.type = 'module'
+  s.src = 'https://losos.org/losos/shell.js'
+  document.body.appendChild(s)
+})()
+</script>
+</body>
+</html>

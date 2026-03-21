@@ -1,0 +1,31 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "bt": "https://blocktrails.org/ns/"
+  },
+  "@id": "#this",
+  "@type": "VoucherPool",
+  "schema:name": "Voucher Pool",
+  "schema:description": "Testnet4 voucher management and faucet",
+  "schema:hasPart": [
+    {
+      "@id": "blocktrail.jsonld#this"
+    },
+    {
+      "@id": "webledger.jsonld#this"
+    },
+    {
+      "@id": "ledger-history.jsonld#this"
+    }
+  ],
+  "schema:itemListElement": [
+    {
+      "@type": "schema:ListItem",
+      "@id": "mn05mqrf",
+      "schema:identifier": "txo:btc:d3a54de54a9df9e89b02dfda4274bbb12180c2ac75cb523917a66f515d01b977:0?amount=416366&key=b8f86cd4e9a6f5db705ebfbcbe3093745b10b2781a7ead82647dc770bd60fb02",
+      "schema:address": "tb1pgl8m440er9gmhvxepwuscduanw4xf6p2ccfaetqq48pcxfnhfazsqa22kz",
+      "schema:status": "unspent",
+      "schema:dateCreated": "2026-03-21T09:57:43.035Z"
+    }
+  ]
+}
