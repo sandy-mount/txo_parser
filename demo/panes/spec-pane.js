@@ -100,12 +100,19 @@ export default {
         </div>
 
         <div class="sp-section">
-          <h2>6. Security</h2>
+          <h2>6. Integration with did:nostr</h2>
+          <div class="sp-p">TXO URIs pair naturally with <a href="https://nostrcg.github.io/did-nostr/" style="color:#3b82f6">did:nostr</a> identifiers. A Nostr keypair can both control a TXO output (via Taproot P2TR) and identify the owner in a ledger:</div>
+          <div class="sp-code">did:nostr:d769d2b81c051d2f2c0b437d0ffe39e00ff0f7161b520f0bd30811f4c057795f</div>
+          <div class="sp-p">This enables web ledgers where did:nostr URIs map to balances, and the same keys anchor state to Bitcoin via <a href="https://blocktrails.org/" style="color:#f7931a">blocktrails</a>.</div>
+        </div>
+
+        <div class="sp-section">
+          <h2>7. Security</h2>
           <div class="sp-warn">\u26A0 Embedding privkey exposes spend authority. Use TLS + QR or secure channels only. URIs are immutable; to replace an output, create a new URI.</div>
         </div>
 
         <div class="sp-section">
-          <h2>7. Install</h2>
+          <h2>8. Install</h2>
           <div class="sp-code">npm install txo_parser</div>
           <div class="sp-code">import { parseTxoUri, formatTxoUri } from 'txo_parser'</div>
         </div>

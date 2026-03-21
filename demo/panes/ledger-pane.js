@@ -488,7 +488,7 @@ export default {
 
             ${editingEntry === 'new' ? html`
               <div class="wl-add-row" style="margin-bottom:12px">
-                <input class="wl-input wl-new-url" placeholder="URI (did:nostr:..., https://...)" style="flex:2"
+                <input class="wl-input wl-new-url" placeholder="did:nostr:pubkey or any URI" style="flex:2"
                   onkeydown="${function(e) { if (e.key === 'Enter') addEntry() }}" />
                 <input class="wl-input wl-new-amount" placeholder="Amount" style="flex:0.5;min-width:100px"
                   onkeydown="${function(e) { if (e.key === 'Enter') addEntry() }}" />

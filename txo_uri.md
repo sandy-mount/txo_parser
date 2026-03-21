@@ -81,6 +81,18 @@ value        = *VCHAR
 
 ---
 
+## 5.1 Integration with did:nostr
+
+TXO URIs pair naturally with [did:nostr](https://nostrcg.github.io/did-nostr/) identifiers. A Nostr keypair can both control a TXO output (via Taproot P2TR) and identify the owner in a ledger:
+
+```
+did:nostr:d769d2b81c051d2f2c0b437d0ffe39e00ff0f7161b520f0bd30811f4c057795f
+```
+
+This enables use cases like web ledgers where `did:nostr:` URIs map to balances, and the same keys anchor state to Bitcoin via blocktrails.
+
+---
+
 ## 6. Reference JSON mapping
 
 The canonical parse result **MUST** expand snake_case keys exactly as shown.
