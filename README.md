@@ -1,6 +1,8 @@
 # TXO URI Parser
 
-A pure JavaScript ES module for parsing and formatting TXO URIs according to the [TXO URI Specification v0.1](txo_uri.md).
+A pure JavaScript ES module for parsing and formatting TXO URIs according to the [TXO URI Specification v0.2](txo_uri.md).
+
+**[Live Demo](https://sandy-mount.github.io/txo_parser/demo/)** — Parse, build, manage vouchers, anchor state to Bitcoin. 7 interactive panes powered by [LOSOS](https://losos.org/).
 
 ## Installation
 
